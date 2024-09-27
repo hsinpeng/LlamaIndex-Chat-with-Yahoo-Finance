@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-import os
-
 from llama_index.llms.openai import OpenAI
 from llama_index.core import Settings
 from llama_index.core.agent import ReActAgent

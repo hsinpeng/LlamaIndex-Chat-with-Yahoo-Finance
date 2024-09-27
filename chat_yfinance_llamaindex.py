@@ -1,13 +1,24 @@
 import streamlit as st
+from st_dev_info import developer_info_simple_stream, developer_info_simple_static
 from llama_index.llms.openai import OpenAI
 from llama_index.core import Settings
 from llama_index.core.agent import ReActAgent
 from llama_index.tools.yahoo_finance import YahooFinanceToolSpec
 
+APP_TITLE = "LlamaIndex: Chat with Yahoo Finance"
+AUTHOR = "Sheldon Hsin-Peng Lin"
+EMAIL = "hsinpeng168@gmail.com"
+GITHUB = "https://github.com/hsinpeng"
 
-st.set_page_config(page_title="LlamaIndex: Chat with Yahoo Finance", page_icon="🦜")
-st.title(":bar_chart: LlamaIndex: Chat with Yahoo Finance")
-
+st.set_page_config(page_title=APP_TITLE, page_icon="🦜")
+st.title(f":bar_chart: {APP_TITLE}")
+# Display author info
+if "has_been_streamed" not in st.session_state:
+    st.session_state["has_been_streamed"] = True
+    developer_info_simple_stream(author=AUTHOR, email=EMAIL, github=GITHUB)
+else:
+    developer_info_simple_static(author=AUTHOR, email=EMAIL, github=GITHUB)
+st.divider()
 
 openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 if "messages" not in st.session_state or st.sidebar.button("Clear conversation history"):
